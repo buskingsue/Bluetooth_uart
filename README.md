@@ -1,14 +1,17 @@
 # 1. Bluetooth 통신 master 브랜치
+## PORTD 2번 TX->RX 3번 RX->TX 연결
 ##
 # 2. LCD I2C통신 LCD_I2C 브랜치
 ##
 # 3. 초음파 센서 ultra_sensor 브랜치 
+## PORTD 6번 ECHO 7번 TRIGGER
+##
 ## 현재 브랜치 확인 명령어 git branch
 ##
 ## 특정 브랜치 클론 명령어 git clone -b master <저장소 URL>
 ##
 # uart0_string_input
-## PORTD 2번 TX->RX 3번 RX->TX 연결
+
 # UART 통신 문자열 입력 문자열 출력
 ##
 ###
