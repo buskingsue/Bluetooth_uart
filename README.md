@@ -2,6 +2,7 @@
 ##
 # 2. LCD I2C통신 LCD_I2C 브랜치
 ##
+# 3. 초음파 센서 ultra_sensor 브랜치 
 ## 현재 브랜치 확인 명령어 git branch
 ##
 ## 특정 브랜치 클론 명령어 git clone -b master <저장소 URL>
