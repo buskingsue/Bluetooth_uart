@@ -4,7 +4,7 @@
 ##
 ## 현재 브랜치 확인 명령어 git branch
 ##
-## 특정 브랜치 클론 명령어git clone -b master <저장소 URL>
+## 특정 브랜치 클론 명령어 git clone -b master <저장소 URL>
 ##
 # uart0_string_input
 ##
