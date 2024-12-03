@@ -1,0 +1,58 @@
+// 프로그램 보낼때는 보드의 isp모드
+// 그다음 uarto모드
+// sudo apt install moserial
+// ls /dev/tty*
+// sudo chmod 777 /dev/ttyUSB0
+// ls -l /dev/ttyUSB0
+#include "uart1.h"
+
+#define MAX_INPUT_LENGTH 100 // 입력 문자열 최대 길이
+
+volatile char inputBuffer[MAX_INPUT_LENGTH]; // 입력 버퍼
+volatile uint8_t input_index1 = 0;            // 현재 입력 위치
+
+void UART1_init(uint16_t baudrate1) {
+    uint16_t ubrr_value = F_CPU / 16 / baudrate1 - 1; // UBRR 값 계산
+
+    // UART 속도 설정
+    UBRR1H = (uint8_t)(ubrr_value >> 8); // 상위 바이트
+    UBRR1L = (uint8_t)ubrr_value;        // 하위 바이트
+
+    // 송신(TX) 및 수신(RX) 활성화, 인터럽트 활성화
+    UCSR1B = (1 << RXEN1) | (1 << TXEN1) | (1 << RXCIE1);
+
+    // 비동기 모드, 8비트 데이터, 1 스톱 비트, 패리티 없음
+    UCSR1C = (1 << UCSZ11) | (1 << UCSZ10);
+}
+
+void UART1_transmit(char data1) {
+    // 송신 가능 대기
+    while (!(UCSR1A & (1 << UDRE1)));
+    UDR1 = data1; // 데이터 전송
+}
+
+void UART1_transmit_string(const char *str1) {
+    while (*str1) {
+        UART1_transmit(*str1++); // 문자열의 각 문자 송신
+    }
+}
+
+// UART1 수신 인터럽트 서비스 루틴
+ISR(USART1_RX_vect) {
+    char received = UDR1; // 수신된 데이터 읽기
+
+    if (received == '\r' || received == '\n') {
+        inputBuffer[input_index1] = '\0';          // 문자열 종료
+        if (input_index1 > 0) { // 입력된 문자열이 비어 있지 않은 경우에만 처리
+            UART1_transmit_string("Bluetooth(kds) : ");
+            UART1_transmit_string((const char *)inputBuffer); // 문자열 출력
+            UART1_transmit_string("\r\n");
+        }
+        input_index1 = 0;                          // 버퍼 인덱스 초기화
+    } else if (input_index1 < MAX_INPUT_LENGTH - 1) {
+        inputBuffer[input_index1++] = received;    // 문자 저장
+    } else {
+        UART1_transmit_string("Input Too Long!\r\n");
+        input_index1 = 0;                          // 버퍼 초기화
+    }
+}
