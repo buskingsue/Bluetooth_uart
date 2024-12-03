@@ -1,4 +1,5 @@
-# Bluetooth 통신
+# 1. Bluetooth 통신 master 브랜치
+# 2. LCD I2C통신 LCD_I2C 브랜치
 # uart0_string_input
 # UART 통신 문자열 입력 문자열 출력
 ##
