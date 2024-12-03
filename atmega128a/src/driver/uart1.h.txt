@@ -1,0 +1,9 @@
+#include "common/def.h"
+
+void UART1_init(uint16_t baudrate1);
+
+// UART1 단일 문자 송신 함수
+void UART1_transmit(char data1);
+
+// UART1 문자열 송신 함수
+void UART1_transmit_string(const char *str1);
