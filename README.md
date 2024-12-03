@@ -7,7 +7,7 @@
 ## 특정 브랜치 클론 명령어 git clone -b master <저장소 URL>
 ##
 # uart0_string_input
-##
+## PORTD 2번 TX->RX 3번 RX->TX 연결
 # UART 통신 문자열 입력 문자열 출력
 ##
 ###
