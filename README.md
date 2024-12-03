@@ -2,6 +2,7 @@
 ## PORTD 2번 TX->RX 3번 RX->TX 연결
 ##
 # 2. LCD I2C통신 LCD_I2C 브랜치
+##D포트 0번 1번핀
 ##
 # 3. 초음파 센서 ultra_sensor 브랜치 
 ## PORTD 6번 ECHO 7번 TRIGGER
